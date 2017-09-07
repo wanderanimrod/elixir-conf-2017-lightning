@@ -13,5 +13,8 @@ defmodule MyAppTest do
 
     {:error, error_details} = MyApp.fetch_facebook_profile(profile_id, fake_client)
     assert error_details == "failed to fetch profile. REASON: #{expected_error}"
+
+    assert_called fake_client.get("https://api.facebook.com/#{profile_id}")
+    refute_called fake_client.get("https://deprecated-api.facebook.com/#{profile_id}")
   end
 end
