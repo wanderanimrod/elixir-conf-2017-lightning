@@ -6,6 +6,7 @@ defmodule MyApp.Mixfile do
       app: :my_app,
       version: "0.1.0",
       elixir: "~> 1.5",
+      elixirc_paths: elixirc_paths(Mix.env),
       start_permanent: Mix.env == :prod,
       deps: deps()
     ]
@@ -22,6 +23,11 @@ defmodule MyApp.Mixfile do
   defp deps do
     [
        {:elixir_mock, "~> 0.2.4"},
+       {:httpoison, "~> 0.13.0"}
     ]
   end
+
+  # Specifies which paths to compile per environment.
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_),     do: ["lib"]
 end
